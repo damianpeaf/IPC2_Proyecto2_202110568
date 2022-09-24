@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<listaEmpresas>
+    <empresa id="$codigoEmpresa">
+        <nombre>$nombreEmpresa</nombre>
+        <abreviatura>$abreviatura</abreviatura>
+        <listaPuntosAtencion>
+            <puntoAtencion id="$codigoPunto">
+                <nombre>$nombrePuntoServicio</nombre>
+                <direccion>$direccionPuntoServicio</direccion>
+                <listaEscritorios>
+                    <escritorio id="$codigoEscritorio">
+                        <identificacion>$identificacionEscritorio</identificacion>
+                        <encargado> $nombreEncargado </encargado>
+                    </escritorio>
+                </listaEscritorios>
+            </puntoAtencion>
+        </listaPuntosAtencion>
+        <listaTransacciones>
+            <transaccion id="$codigoTransaccion">
+                <nombre>$nombreTransaccion</nombre>
+                <tiempoAtencion>minutosAtencion</tiempoAtencion>
+            </transaccion>
+        </listaTransacciones>
+    </empresa>
+</listaEmpresas>
