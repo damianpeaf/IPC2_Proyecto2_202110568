@@ -3,7 +3,6 @@
     <configInicial id="$codigoConfiguracion" idEmpresa="$codigoEmpresa" idPunto="$codigoPunto">
         <escritoriosActivos>
             <escritorio idEscritorio="$codigoEscritorio" />
-            <escritorio idEscritorio="$codigoEscritorio" />
         </escritoriosActivos>
         <listadoClientes>
             <cliente dpi="$DPI">

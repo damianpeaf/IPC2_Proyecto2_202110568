@@ -11,15 +11,18 @@ class Queue(Generic[T]):
 
     def __init__(self):
         self._simpleList = SimpleList[T]()
-        self.size = self._simpleList.size
+        self.size = 0
 
     def isEmpty(self):
         return self._simpleList.isEmpty()
 
-    def enqueue(self, data):
+    def enqueue(self, data: T):
+
         self._simpleList.addAtEnd(data)
+        self.size += 1
 
     def dequeue(self):
         aux = self._simpleList.tail.data
         self._simpleList.deleteAtStart()
+        self.size -= 1
         return aux

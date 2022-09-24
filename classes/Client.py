@@ -1,10 +1,10 @@
-from typing import List
 from classes.Transaction import Transaction
+from core.SimpleList import SimpleList
 
 
 class Client():
 
-    def __init__(self, dpi, name, transactions: List[Transaction]):
+    def __init__(self, dpi, name):
         self.name = name
         self.dpi = dpi
-        self.transactions = transactions
+        self.transactions = SimpleList[Transaction]()

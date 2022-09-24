@@ -1,47 +1,53 @@
 
 
-from typing import List
 from classes.AttentionPoint import AttentionPoint
 from classes.Company import Company
+from core.SimpleList import SimpleList
 
 
 class Data():
 
-    companies: List[Company] = []
+    companies = SimpleList[Company]()
 
     @classmethod
     def resetData(cls):
-        cls.companies = []
+        cls.companies.clear()
 
     @classmethod
-    def addCompanies(cls, companies: List[Company]):
-        cls.companies += companies
+    def addCompany(cls, company: Company):
+        cls.companies.addAtEnd(company)
 
     @classmethod
     def searchCompanyById(cls, companyId: str):
-        for company in cls.companies:
-            if company.id == companyId:
-                return company
+
+        for index in range(0, cls.companies.size):
+            evalCompany = cls.companies.getItem(index)
+            if evalCompany.id == companyId:
+                return evalCompany
         return None
 
     @classmethod
     def searchAttentionPointById(cls, attentionPointId: str, company: Company):
 
-        for attentionPoint in company.attentionPoints:
-            if attentionPoint.id == attentionPointId:
-                return attentionPoint
+        for index in range(0, company.attentionPoints.size):
+            evalAttentionPoint = company.attentionPoints.getItem(index)
+            if evalAttentionPoint.id == attentionPointId:
+                return evalAttentionPoint
         return None
 
     @classmethod
-    def searchDesktopById(cls, desktopId: str, attentionPoint: AttentionPoint):
-        for desktop in attentionPoint.desktops:
-            if desktop.id == desktopId:
-                return desktop
+    def searchInactiveDesktopById(cls, desktopId: str, attentionPoint: AttentionPoint):
+
+        for index in range(0, attentionPoint.inactiveDesktops.size):
+            evalDesktop = attentionPoint.inactiveDesktops.getItem(index)
+            if evalDesktop.id == desktopId:
+                return evalDesktop
         return None
 
     @classmethod
     def searchTransactionTypeById(cls, transactionTypeId: str, company: Company):
-        for transactionType in company.availableTransactions:
-            if transactionType.id == transactionTypeId:
-                return transactionType
+        for index in range(0, company.availableTransactions.size):
+            evalTransactionType = company.availableTransactions.getItem(index)
+            if evalTransactionType.id == transactionTypeId:
+                return evalTransactionType
         return None

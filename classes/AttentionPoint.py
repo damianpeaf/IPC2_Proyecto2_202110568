@@ -1,13 +1,12 @@
-
-from typing import List
-
 from classes.Desktop import Desktop
+from core.Stack import Stack
 
 
 class AttentionPoint():
 
-    def __init__(self, id, name, address, desktops: List[Desktop]):
+    def __init__(self, id, name, address):
         self.id = id
         self.name = name
         self.address = address
-        self.desktops = desktops
+        self.activeDesktops = Stack[Desktop]()
+        self.inactiveDesktops = Stack[Desktop]()
