@@ -8,3 +8,6 @@ class TransactionType():
         # * Time of attention in minutes
         # ? str
         self.timeOfAttention = timeOfAttention
+
+    def getAsStr(self):
+        return "- ID: " + self.id + "\n- Nombre: " + self.name + "\n- Tiempo de atención: " + str(self.timeOfAttention) + " minutos\n"

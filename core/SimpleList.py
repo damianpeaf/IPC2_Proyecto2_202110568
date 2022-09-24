@@ -27,7 +27,7 @@ class SimpleList(Generic[T]):
             self.tail = newNode
         self.size += 1
 
-    def addAtEnd(self, data):
+    def addAtEnd(self, data: T):
 
         newNode = Node[T](data)
 

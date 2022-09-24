@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <listadoInicial>
-    <configInicial id="$codigoConfiguracion" idEmpresa="$codigoEmpresa" idPunto="$codigoPunto">
+    <configInicial id="configuracion1" idEmpresa="empresa1" idPunto="zona1">
         <escritoriosActivos>
-            <escritorio idEscritorio="$codigoEscritorio" />
+            <escritorio idEscritorio="escritorio1" />
         </escritoriosActivos>
         <listadoClientes>
-            <cliente dpi="$DPI">
-                <nombre>$nombreCliente</nombre>
+            <cliente dpi="12345678910">
+                <nombre>Pedro Quiñonez</nombre>
                 <listadoTransacciones>
-                    <transaccion idTransaccion="$codigoTransaccion" cantidad="cantTrans" />
-                    <transaccion idTransaccion="$codigoTransaccion" cantidad="cantTrans" />
+                    <transaccion idTransaccion="deposito-bancario" cantidad="100.00" />
+                    <transaccion idTransaccion="deposito-bancario" cantidad="20.00" />
                 </listadoTransacciones>
             </cliente>
         </listadoClientes>

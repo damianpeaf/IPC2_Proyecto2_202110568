@@ -26,7 +26,8 @@ class CompanyActions():
                                    '2. Cargar un archivo (incremental)',
                                    '3. Crear una nueva empresa',
                                    '4. Cargar archivo de configuración inicial',
-                                   '5. Regresar al menu principal',
+                                   '5. Listar empresas',
+                                   '6. Regresar al menu principal',
                                    ],
                           carousel=True
                           ),
@@ -42,11 +43,18 @@ class CompanyActions():
             LoadFile(1)
             return
         elif selectedOption == 3:
-            self.console.print('Crear una nueva empresa')
+            from views.CreateCompany import CreateCompany
+            c = CreateCompany()
+            c.init()
+            return
         elif selectedOption == 4:
             LoadFile(2)
             return
         elif selectedOption == 5:
+            from views.ListCompanies import ListCompanies
+            ListCompanies()
+            return
+        elif selectedOption == 6:
             from views.MainMenu import MainMenu
             MainMenu()
             return

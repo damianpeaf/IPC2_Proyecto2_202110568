@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <listaEmpresas>
-    <empresa id="$codigoEmpresa">
-        <nombre>$nombreEmpresa</nombre>
-        <abreviatura>$abreviatura</abreviatura>
+    <empresa id="empresa1">
+        <nombre>Banrural</nombre>
+        <abreviatura>ban</abreviatura>
         <listaPuntosAtencion>
-            <puntoAtencion id="$codigoPunto">
-                <nombre>$nombrePuntoServicio</nombre>
-                <direccion>$direccionPuntoServicio</direccion>
+            <puntoAtencion id="zona1">
+                <nombre>Banrural Zona 1</nombre>
+                <direccion>1ave 1-1 zona 1</direccion>
                 <listaEscritorios>
-                    <escritorio id="$codigoEscritorio">
-                        <identificacion>$identificacionEscritorio</identificacion>
-                        <encargado> $nombreEncargado </encargado>
+                    <escritorio id="escritorio1">
+                        <identificacion>identificador 1</identificacion>
+                        <encargado>Juan Perez</encargado>
                     </escritorio>
                 </listaEscritorios>
             </puntoAtencion>
         </listaPuntosAtencion>
         <listaTransacciones>
-            <transaccion id="$codigoTransaccion">
-                <nombre>$nombreTransaccion</nombre>
-                <tiempoAtencion>minutosAtencion</tiempoAtencion>
+            <transaccion id="deposito-bancario">
+                <nombre>Deposito bancario</nombre>
+                <tiempoAtencion>2</tiempoAtencion>
             </transaccion>
         </listaTransacciones>
     </empresa>
