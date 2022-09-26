@@ -51,3 +51,19 @@ class Data():
             if evalTransactionType.id == transactionTypeId:
                 return evalTransactionType
         return None
+
+    @classmethod
+    def getCompanyChoices(cls):
+        choices = []
+        for index in range(0, cls.companies.size):
+            evalCompany = cls.companies.getItem(index)
+            choices.append(f"{str(index+1)} - {evalCompany.name}")
+        return choices
+
+    @staticmethod
+    def getAttentionPointChoices(company: Company):
+        choices = []
+        for index in range(0, company.attentionPoints.size):
+            evalAttentionPoint = company.attentionPoints.getItem(index)
+            choices.append(f"{str(index+1)} - {evalAttentionPoint.name}")
+        return choices

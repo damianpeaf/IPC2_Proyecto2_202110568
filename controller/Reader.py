@@ -140,6 +140,5 @@ class Reader():
             aw = Data.companies
             return True
         except Exception as e:
-            self.console.print_exception()
             self.console.print(e, style='bold red')
             return False

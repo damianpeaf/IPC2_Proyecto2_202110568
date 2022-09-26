@@ -36,7 +36,8 @@ class MainMenu():
             from views.CompanyActions import CompanyActions
             CompanyActions()
         elif selectedOption == 2:
-            self.console.print('Seleccionar Empresa para simular')
+            from views.SelectCompany import SelectCompany
+            SelectCompany()
         elif selectedOption == 3:
             self.console.print('Hasta pronto :)', style='red')
             exit()
