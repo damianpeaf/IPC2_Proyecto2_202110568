@@ -135,9 +135,8 @@ class Reader():
 
                         clientObj.transactions.addAtEnd(Transaction(posibleTransactionType, transactionQuantity))
 
-                    posibleCompany.clients.enqueue(clientObj)
+                    posibleAttentionPoint.clients.enqueue(clientObj)
 
-            aw = Data.companies
             return True
         except Exception as e:
             self.console.print(e, style='bold red')

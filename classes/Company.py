@@ -15,7 +15,6 @@ class Company():
         self.abbreviaton = abbreviaton
         self.attentionPoints = SimpleList[AttentionPoint]()
         self.availableTransactions = SimpleList[TransactionType]()
-        self.clients = Queue[Client]()
 
     def getAtentionPointsAsStr(self):
 

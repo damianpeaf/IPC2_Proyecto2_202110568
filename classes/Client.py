@@ -8,3 +8,7 @@ class Client():
         self.name = name
         self.dpi = dpi
         self.transactions = SimpleList[Transaction]()
+        self.waitedTime = 0
+
+    def waitOneSecond(self):
+        self.waitedTime += (1/60)

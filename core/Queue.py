@@ -13,6 +13,9 @@ class Queue(Generic[T]):
         self._simpleList = SimpleList[T]()
         self.size = 0
 
+    def getItem(self, index):
+        return self._simpleList.getItem(index)
+
     def isEmpty(self):
         return self._simpleList.isEmpty()
 
