@@ -67,3 +67,16 @@ class Data():
             evalAttentionPoint = company.attentionPoints.getItem(index)
             choices.append(f"{str(index+1)} - {evalAttentionPoint.name}")
         return choices
+
+    @staticmethod
+    def getTransactionTypesChoices(company: Company):
+        choices = []
+
+        for index in range(0, company.availableTransactions.size):
+            evalTransactionType = company.availableTransactions.getItem(index)
+            choices.append(f"{str(index+1)}. - {evalTransactionType.name}")
+        return choices
+
+    @staticmethod
+    def getTransactionTypeByIndex(company: Company, index: int):
+        return company.availableTransactions.getItem(index)

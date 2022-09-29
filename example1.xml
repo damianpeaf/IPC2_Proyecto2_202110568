@@ -12,13 +12,21 @@
                         <identificacion>identificador 1</identificacion>
                         <encargado>Juan Perez</encargado>
                     </escritorio>
+                    <escritorio id="escritorio2">
+                        <identificacion>identificador 2</identificacion>
+                        <encargado>Damian Sanchez</encargado>
+                    </escritorio>
                 </listaEscritorios>
             </puntoAtencion>
         </listaPuntosAtencion>
         <listaTransacciones>
             <transaccion id="deposito-bancario">
                 <nombre>Deposito bancario</nombre>
-                <tiempoAtencion>2</tiempoAtencion>
+                <tiempoAtencion>0.2</tiempoAtencion>
+            </transaccion>
+            <transaccion id="cancelacion-cuenta">
+                <nombre>Cancelacion de cuenta</nombre>
+                <tiempoAtencion>1</tiempoAtencion>
             </transaccion>
         </listaTransacciones>
     </empresa>

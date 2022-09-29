@@ -25,6 +25,9 @@ class Queue(Generic[T]):
         self.size += 1
 
     def dequeue(self):
+
+        if self.isEmpty():
+            return None
         aux = self._simpleList.tail.data
         self._simpleList.deleteAtStart()
         self.size -= 1

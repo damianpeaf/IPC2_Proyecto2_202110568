@@ -8,11 +8,14 @@ class AttentionPoint():
 
     def __init__(self, id, name, address):
         self.id = id
-        self.name = name
+        self.name: str = name
         self.address = address
         self.activeDesktops = Stack[Desktop]()
         self.inactiveDesktops = Stack[Desktop]()
         self.clients = Queue[Client]()
+
+        self.haveToDeactivateDesktop = False
+
         self.initSimulationProps()
 
     def getAsStr(self):
@@ -60,6 +63,10 @@ class AttentionPoint():
 
     def elapsedOneSecond(self):
 
+        # Deactivate desktop if it's necessary
+
+        self._evalDeactivateDesktop()
+
         # Fill desktops if its posible
 
         # If there are clients in queue
@@ -71,7 +78,9 @@ class AttentionPoint():
 
                 # if the desktop is available
                 if desktop.canAttendClient():
-                    desktop.attendClient(self.clients.dequeue())
+                    client = self.clients.dequeue()
+                    if client:
+                        desktop.attendClient(client)
 
         # Work on clients transactions
 
@@ -87,59 +96,156 @@ class AttentionPoint():
 
         self.recalculateSimulationProps()
 
+    def addClient(self, client):
+        self.clients.enqueue(client)
+
     def recalculateSimulationProps(self):
 
-        # average, minimun and maximum waiting time
-        self.totalWaitingTime = 0
-        for i in range(0, self.clients.size):
-            actualClient = self.clients.getItem(i)
-            nextClient = self.clients.getItem(i+1)
+        # * Attendance times
 
-            if i < self.clients.size - 2:
-                if nextClient.waitedTime < actualClient.waitedTime:
-                    self.minimumWaitingTime = nextClient.waitedTime
-                elif nextClient.waitedTime > actualClient.waitedTime:
-                    self.maximumWaitingTime = nextClient.waitedTime
+        totalAttentionAverageTime = 0
+        for i in range(0, self.activeDesktops.size):
+            desktop = self.activeDesktops.getItem(i)
 
-            self.totalWaitingTime += actualClient.waitedTime
+            totalAttentionAverageTime += desktop.averageAttentionTime
+
+            if i == 0:
+                self.maximumAttentionTime = desktop.maximumAttentionTime
+                self.minimumWaitingTime = self.minimumAttentionTime = desktop.minimumAttentionTime
+
+            if desktop.maximumAttentionTime > self.maximumAttentionTime:
+                self.maximumAttentionTime = desktop.maximumAttentionTime
+
+            if desktop.minimumAttentionTime < self.minimumAttentionTime:
+                self.minimumWaitingTime = self.minimumAttentionTime = desktop.minimumAttentionTime
+
+        for i in range(0, self.activeDesktops.size):
+            desktop = self.activeDesktops.getItem(i)
+
+            totalAttentionAverageTime += desktop.averageAttentionTime
+
+            if i == 0 and self.activeDesktops.size == 0:
+                self.maximumAttentionTime = desktop.maximumAttentionTime
+                self.minimumAttentionTime = desktop.minimumAttentionTime
+
+            if desktop.maximumAttentionTime > self.maximumAttentionTime:
+                self.maximumAttentionTime = desktop.maximumAttentionTime
+
+            if desktop.minimumAttentionTime < self.minimumAttentionTime:
+                self.minimumAttentionTime = desktop.minimumAttentionTime
+
+        self.averageAttentionTime = totalAttentionAverageTime / (self.activeDesktops.size + self.inactiveDesktops.size)
+
+        # * Waiting times
+
+        # Average waiting time
 
         if self.clients.size != 0:
-            self.averageWaitingTime = self.totalWaitingTime / self.clients.size
-        else:
-            self.averageWaitingTime = 0
 
-        # average, minimun and maximum attedance time
-        self.totalAttentionTime = 0
+            self.maximumWaitingTime = 0
+            totalWaitingAverageTime = 0
+            for i in range(0, self.clients.size-1):
+                client = self.clients.getItem(i)
+                totalWaitingAverageTime += float(client.getTransactionTotalTimeAsStr())+self.averageAttentionTime
+                self.maximumWaitingTime += float(client.getTransactionTotalTimeAsStr())
+
+            self.maximumWaitingTime += self.maximumAttentionTime
+
+            n = 1
+
+            if self.clients.size-1 != 0:
+                n = self.clients.size-1
+
+            self.averageWaitingTime = totalWaitingAverageTime / n
+
+    def getDestopSimulationPropsAsStr(self):
+        result = ""
+
         for i in range(0, self.activeDesktops.size):
-            actualDesktop = self.activeDesktops.getItem(i)
-            nextDeskop = self.activeDesktops.getItem(i+1)
+            desktop = self.activeDesktops.getItem(i)
+            result += desktop.getSimulationPropsAsStr()
+            result += "\n"
 
-            self.totalAttentionTime += actualDesktop.totalAttentionTime
+        return result
 
-            if i < self.activeDesktops.size - 2:
+    def _evalDeactivateDesktop(self):
+        if self.haveToDeactivateDesktop:
+            if self.activeDesktops.size > 0:
 
-                if nextDeskop.totalAttentionTime < actualDesktop.totalAttentionTime:
-                    self.minimumAttentionTime = nextDeskop.totalAttentionTime
-                if actualDesktop.totalAttentionTime < nextDeskop.totalAttentionTime:
-                    self.maximumAttentionTime = nextDeskop.totalAttentionTime
+                desktopToDeactivate = self.activeDesktops.getItem(0)
 
-        if self.activeDesktops.size != 0:
-            self.averageAttentionTime = self.totalAttentionTime / self.activeDesktops.size
-        else:
-            self.averageAttentionTime = 0
+                if desktopToDeactivate.canAttendClient():
+                    self.activeDesktops.pop()
+                    self.inactiveDesktops.push(desktopToDeactivate)
+
+                    self.haveToDeactivateDesktop = False
+
+    def activateDesktop(self):
+        if self.inactiveDesktops.size > 0:
+            desktopToActivate = self.inactiveDesktops.getItem(0)
+
+            self.inactiveDesktops.pop()
+            self.activeDesktops.push(desktopToActivate)
+            return True
+        return False
+
+    def endNextClientTransaction(self, updateTime):
+        client = self.clients.getItem(0)
+
+        if client is None:
+            return False
+
+        transactionsCount = 1
+
+        while transactionsCount > 0:
+            self.elapsedOneSecond()
+            updateTime()
+            transactionsCount = client.transactions.size
+
+    def getTotalAttendedClients(self):
+        total = 0
+
+        for i in range(0, self.activeDesktops.size):
+            desktop = self.activeDesktops.getItem(i)
+            total += desktop.clientsAttended
+
+        for i in range(0, self.inactiveDesktops.size):
+            desktop = self.inactiveDesktops.getItem(i)
+            total += desktop.clientsAttended
+
+        return total
+
+    def isDesktopAttending(self):
+
+        if self.activeDesktops.size <= 0:
+            return False
+
+        for i in range(0, self.activeDesktops.size):
+            desktop = self.activeDesktops.getItem(i)
+
+            if desktop is None:
+                continue
+
+            if desktop.attendentClient is not None:
+                return True
+
+        return False
 
     def getSimulationPropsAsStr(self):
         return f"""
-        Escritorios activos: {str(self.activeDesktops.size)}
-        Escritorios inactivos: {str(self.inactiveDesktops.size)}
-        Clientes en cola: {str(self.clients.size)}
+        Escritorios activos: {str(round(self.activeDesktops.size,2))}
+        Escritorios inactivos: {str(round(self.inactiveDesktops.size,2))}
+        Clientes en cola: {str(round(self.clients.size,2))}
+        Clientes atendidos: {str(round(self.getTotalAttendedClients(),2))}
 
-        Tiempo promedio de espera: {str(self.averageWaitingTime)}
-        Tiempo máximo de espera: {str(self.maximumWaitingTime)}
-        Tiempo mínimo de espera: {str(self.minimumWaitingTime)}
+        Tiempo promedio de espera: {str(round(self.averageWaitingTime,2))}
+        Tiempo máximo de espera: {str(round(self.maximumWaitingTime,2))}
+        Tiempo mínimo de espera: {str(round(self.minimumWaitingTime,2))}
 
-        Tiempo promedio de atención: {str(self.averageAttentionTime)}
-        Tiempo máximo de atención: {str(self.maximumAttentionTime)}
-        Tiempo mínimo de atención: {str(self.minimumAttentionTime)}
+        Tiempo promedio de atención: {str(round(self.averageAttentionTime,2))}
+        Tiempo máximo de atención: {str(round(self.maximumAttentionTime,2))}
+        Tiempo mínimo de atención: {str(round(self.minimumAttentionTime,2))}
         
+{self.getDestopSimulationPropsAsStr()}
+
         """

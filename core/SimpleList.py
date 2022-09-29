@@ -45,6 +45,7 @@ class SimpleList(Generic[T]):
         elif self.tail == self.head:
             self.tail = None
             self.head = None
+            self.size -= 1
         else:
             self.tail = self.tail.next
             self.size -= 1
@@ -55,6 +56,7 @@ class SimpleList(Generic[T]):
         elif self.tail == self.head:
             self.tail = None
             self.head = None
+            self.size -= 1
         else:
             current = self.tail
             while current.next != self.head:

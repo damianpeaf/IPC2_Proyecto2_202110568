@@ -57,4 +57,4 @@ class SelectCompany():
         else:
             self.selectedAttentionPoint = self.selectedCompany.attentionPoints.getItem(selectedOption - 1)
             self.console.print(f'Has seleccionado el punto de atencion: {self.selectedAttentionPoint.name}', style='green')
-            SimulationView(self.selectedAttentionPoint)
+            SimulationView(self.selectedAttentionPoint, self.selectedCompany)

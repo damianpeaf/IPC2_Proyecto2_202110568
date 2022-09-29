@@ -7,7 +7,7 @@ class TransactionType():
         self.name = name
         # * Time of attention in minutes
         # ? str
-        self.timeOfAttention = timeOfAttention
+        self.timeOfAttention = float(timeOfAttention)
 
     def getAsStr(self):
         return "- ID: " + self.id + "\n- Nombre: " + self.name + "\n- Tiempo de atención: " + str(self.timeOfAttention) + " minutos\n"

@@ -1,23 +1,20 @@
-
 from rich.console import Console
 from copy import deepcopy
-import threading
 from classes.AttentionPoint import AttentionPoint
 import time
-
+from classes.Client import Client
 from utils.clear import clear
-
 from pynput import keyboard as kb
 
 
 class Simulation():
 
-    def __init__(self, attentionPoint: AttentionPoint, view):
-        self.view = view
+    def __init__(self, attentionPoint: AttentionPoint):
         self.attentionPointInitialState = deepcopy(attentionPoint)
         self.attentionPoint = attentionPoint
 
         self.console = Console()
+        self.reportNumber = 0
 
         self.running = False
         self.seconds = 0
@@ -25,15 +22,19 @@ class Simulation():
         self.hours = 0
         self.simulationThread = None
 
-    def start(self, runChronometer=True):
+    def createNewReport(self):
+        from controller.GraphvizParser import GraphvizParser
+        self.reportNumber += 1
+        GraphvizParser(self).createPDF()
+        return "Reporte generado"
 
-        if runChronometer:
-            self.running = True
-            self.keyListener = kb.Listener(self.keypress)
-            # self.simulationThread = threading.Thread(target=self.printInfo, daemon=True)
+    def start(self, runDelay=True):
 
-            self.keyListener.start()
-            # self.simulationThread.start()
+        self.keyListener = kb.Listener(self.keypress)
+        self.keyListener.start()
+        self.evalAutoStop()
+
+        if runDelay:
 
             while self.running:
                 self.attentionPoint.elapsedOneSecond()
@@ -41,23 +42,50 @@ class Simulation():
                 time.sleep(1)
                 clear()
                 self.updateTime()
-
-            print(' terminé')
+                if self.running:
+                    self.evalAutoStop()
         else:
-            self._evaluteStateImmediately()
+            while self.running:
+                self.attentionPoint.elapsedOneSecond()
+                self.console.print(self.getSimulationInfoAsStr())
+                clear()
+                self.updateTime()
+                if self.running:
+                    self.evalAutoStop()
+
+    def evalAutoStop(self):
+        # * Free desktops
+
+        if self.attentionPoint.activeDesktops.size == 0:
+            self.stop()
+
+        isAttending = self.attentionPoint.isDesktopAttending()
+        if isAttending or self.attentionPoint.clients.size > 0:
+            self.running = True
+        else:
+            self.running = False
 
     def stop(self):
         self.running = False
-        # self.simulationThread.join()
         self.keyListener.stop()
 
-    def _evaluteStateImmediately(self):
-        # Begin counter from last cronomter value
-        pass
+    def createClient(self, client: Client):
+        self.attentionPoint.addClient(client)
+
+    def deactivateDesktop(self):
+        self.attentionPoint.haveToDeactivateDesktop = True
+
+    def activateDesktop(self):
+        return self.attentionPoint.activateDesktop()
+
+    def getChronometerAsStr(self):
+        return f'{self.hours:02d}:{self.minutes:02d}:{self.seconds:02d}'
+
+    def endNextClientTransaction(self):
+        self.attentionPoint.endNextClientTransaction(self.updateTime)
 
     def getSimulationInfoAsStr(self):
         return f"""
-        
         {self.hours:02d}:{self.minutes:02d}:{self.seconds:02d}
         Presione ESC para detener la simulación
 

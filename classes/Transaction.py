@@ -12,3 +12,5 @@ class Transaction():
 
     def workOneSecond(self):
         self.pendingTime -= (1/60)
+
+    

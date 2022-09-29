@@ -9,7 +9,35 @@
                 <nombre>Pedro Quiñonez</nombre>
                 <listadoTransacciones>
                     <transaccion idTransaccion="deposito-bancario" cantidad="100.00" />
-                    <transaccion idTransaccion="deposito-bancario" cantidad="20.00" />
+                    <transaccion idTransaccion="cancelacion-cuenta" cantidad="9000.00" />
+                </listadoTransacciones>
+            </cliente>
+            <cliente dpi="12345678911">
+                <nombre>Juan Alvarado</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="deposito-bancario" cantidad="30.00" />
+                    <transaccion idTransaccion="deposito-bancario" cantidad="70.00" />
+                </listadoTransacciones>
+            </cliente>
+            <cliente dpi="12345678913">
+                <nombre>Dranco Senco</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="deposito-bancario" cantidad="90.00" />
+                    <transaccion idTransaccion="deposito-bancario" cantidad="1000.00" />
+                </listadoTransacciones>
+            </cliente>
+            <cliente dpi="12345678914">
+                <nombre>Zambi Zummbi</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="deposito-bancario" cantidad="190.00" />
+                    <transaccion idTransaccion="deposito-bancario" cantidad="1000.00" />
+                </listadoTransacciones>
+            </cliente>
+            <cliente dpi="12345678915">
+                <nombre>Trambu</nombre>
+                <listadoTransacciones>
+                    <transaccion idTransaccion="deposito-bancario" cantidad="190.00" />
+                    <transaccion idTransaccion="deposito-bancario" cantidad="1000.00" />
                 </listadoTransacciones>
             </cliente>
         </listadoClientes>
