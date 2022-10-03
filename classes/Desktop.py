@@ -40,8 +40,11 @@ class Desktop():
             nextTransaction.workOneSecond()
             self.recalculateSimulationProps()
 
-            if nextTransaction.pendingTime <= 0:
+            if nextTransaction.pendingTime <= 1/61:
                 self.attendentClient.transactions.deleteAtStart()
+
+                if self.attendentClient.transactions.size == 0:
+                    self.finishCurrentClientAttention()
 
             return True
         else:
@@ -88,4 +91,7 @@ class Desktop():
         {self.attendentClient.getTransactionsAsStr()}
         """ if self.attendentClient is not None else f"""
         Escritorio Libre: {self.id} -  Servidor: {self.attendant} -  Clientes atendidos: {str(self.clientsAttended)}
+        - Tiempo promedio de atención: {str(self.averageAttentionTime)}
+        - Tiempo máximo de atención: {str(self.maximumAttentionTime)}
+        - Tiempo mínimo de atención: {str(self.minimumAttentionTime)}
         """

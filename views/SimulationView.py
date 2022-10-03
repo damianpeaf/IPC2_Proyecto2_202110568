@@ -25,7 +25,9 @@ class SimulationView():
         clear()
 
         self.console.print('Simulación', style='bold red underline')
-        self.console.print(self.simulation.getChronometerAsStr(), style='bold green')
+
+        self.console.print(self.simulation.getSimulationInfoAsStr())
+
         if self.message:
             self.console.print(self.message, style='bold blue')
             self.message = None
@@ -114,7 +116,7 @@ class SimulationView():
             self.message = "Se ha cancelado la creación del cliente"
             self.init()
         elif selectedOption == 3:
-            self.message = "Se ha creado el cliente"
+            self.message = f"Se ha creado el cliente se espera que lo atiendan en {str(round(self.simulation.attentionPoint.averageWaitingTime,2))} minutos"
             self.simulation.createClient(self.createdClient)
             self.init()
 

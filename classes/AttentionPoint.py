@@ -19,7 +19,7 @@ class AttentionPoint():
         self.initSimulationProps()
 
     def getAsStr(self):
-        return "- ID: " + self.id + "\n- Nombre: " + self.name + "\n- Dirección: " + self.address + "\n"
+        return "- ID: " + self.id + "\t\n- Nombre: " + self.name + "\t\n- Dirección: " + self.address + "\n"
 
     def getActiveDesktopsAsStr(self):
 
@@ -61,14 +61,7 @@ class AttentionPoint():
         self.minimumAttentionTime = 0
         self.totalAttentionTime = 0
 
-    def elapsedOneSecond(self):
-
-        # Deactivate desktop if it's necessary
-
-        self._evalDeactivateDesktop()
-
-        # Fill desktops if its posible
-
+    def _fillDesktops(self):
         # If there are clients in queue
         if self.clients.size != 0:
 
@@ -82,12 +75,23 @@ class AttentionPoint():
                     if client:
                         desktop.attendClient(client)
 
+    def elapsedOneSecond(self):
+
+        # Deactivate desktop if it's necessary
+
+        self._evalDeactivateDesktop()
+
+        # Fill desktops if its posible
+        self._fillDesktops()
+
         # Work on clients transactions
 
         for i in range(0, self.activeDesktops.size):
             desktop = self.activeDesktops.getItem(i)
             desktop.workOnNextClientransaction()
 
+        # Fill desktops for ended transactions
+        self._fillDesktops()
         # Update waited time for each client in queue
 
         for i in range(0, self.clients.size):
@@ -146,7 +150,7 @@ class AttentionPoint():
             totalWaitingAverageTime = 0
             for i in range(0, self.clients.size-1):
                 client = self.clients.getItem(i)
-                totalWaitingAverageTime += float(client.getTransactionTotalTimeAsStr())+self.averageAttentionTime
+                totalWaitingAverageTime += (float(client.getTransactionTotalTimeAsStr())+self.averageAttentionTime)
                 self.maximumWaitingTime += float(client.getTransactionTotalTimeAsStr())
 
             self.maximumWaitingTime += self.maximumAttentionTime
@@ -156,7 +160,10 @@ class AttentionPoint():
             if self.clients.size-1 != 0:
                 n = self.clients.size-1
 
-            self.averageWaitingTime = totalWaitingAverageTime / n
+            if totalWaitingAverageTime != 0:
+                self.averageWaitingTime = totalWaitingAverageTime / n
+            else:
+                self.averageWaitingTime = (self.maximumWaitingTime + self.minimumWaitingTime) / 2
 
     def getDestopSimulationPropsAsStr(self):
         result = ""

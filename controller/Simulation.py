@@ -39,16 +39,14 @@ class Simulation():
             while self.running:
                 self.attentionPoint.elapsedOneSecond()
                 self.console.print(self.getSimulationInfoAsStr())
+                self.updateTime()
                 time.sleep(1)
                 clear()
-                self.updateTime()
                 if self.running:
                     self.evalAutoStop()
         else:
             while self.running:
                 self.attentionPoint.elapsedOneSecond()
-                self.console.print(self.getSimulationInfoAsStr())
-                clear()
                 self.updateTime()
                 if self.running:
                     self.evalAutoStop()
@@ -87,7 +85,6 @@ class Simulation():
     def getSimulationInfoAsStr(self):
         return f"""
         {self.hours:02d}:{self.minutes:02d}:{self.seconds:02d}
-        Presione ESC para detener la simulación
 
         {self.attentionPoint.getAsStr()}
 

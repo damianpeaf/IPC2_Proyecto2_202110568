@@ -22,7 +22,7 @@
         <listaTransacciones>
             <transaccion id="deposito-bancario">
                 <nombre>Deposito bancario</nombre>
-                <tiempoAtencion>0.2</tiempoAtencion>
+                <tiempoAtencion>0.3</tiempoAtencion>
             </transaccion>
             <transaccion id="cancelacion-cuenta">
                 <nombre>Cancelacion de cuenta</nombre>

@@ -9,14 +9,12 @@
                 <nombre>Pedro Quiñonez</nombre>
                 <listadoTransacciones>
                     <transaccion idTransaccion="deposito-bancario" cantidad="100.00" />
-                    <transaccion idTransaccion="cancelacion-cuenta" cantidad="9000.00" />
                 </listadoTransacciones>
             </cliente>
             <cliente dpi="12345678911">
                 <nombre>Juan Alvarado</nombre>
                 <listadoTransacciones>
                     <transaccion idTransaccion="deposito-bancario" cantidad="30.00" />
-                    <transaccion idTransaccion="deposito-bancario" cantidad="70.00" />
                 </listadoTransacciones>
             </cliente>
             <cliente dpi="12345678913">
