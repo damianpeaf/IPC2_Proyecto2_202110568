@@ -25,7 +25,7 @@ class Client():
         for i in range(0, self.transactions.size):
             transaction = self.transactions.getItem(i)
             formatedNumber = "{:.2f}".format(transaction.pendingTime)
-            result += f"Transaccion: {transaction.transactionType.name} - Tiempo restante - {str(formatedNumber)} minutos\n\t"
+            result += f"Transaccion: {transaction.transactionType.name} x {transaction.quantity} - Tiempo restante - {str(formatedNumber)} minutos\n\t"
 
         return result
 
@@ -33,7 +33,7 @@ class Client():
         result = 0
         for i in range(0, self.transactions.size):
             transaction = self.transactions.getItem(i)
-            result += transaction.transactionType.timeOfAttention
+            result += transaction.transactionType.timeOfAttention * int(transaction.quantity)
 
         formatedTime = "{:.2f}".format(result)
 
