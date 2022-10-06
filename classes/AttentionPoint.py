@@ -16,6 +16,8 @@ class AttentionPoint():
 
         self.haveToDeactivateDesktop = False
 
+        self.alarm = ""
+
         self.initSimulationProps()
 
     def getAsStr(self):
@@ -72,6 +74,7 @@ class AttentionPoint():
                 # if the desktop is available
                 if desktop.canAttendClient():
                     client = self.clients.dequeue()
+                    self.alarm += f"Puede pasar {client.name} a la mesa {desktop.id}\n\t"
                     if client:
                         desktop.attendClient(client)
 
@@ -240,6 +243,7 @@ class AttentionPoint():
 
     def getSimulationPropsAsStr(self):
         return f"""
+        INFORMACIÓN PUNTO DE ATENCIÓN
         Escritorios activos: {str(round(self.activeDesktops.size,2))}
         Escritorios inactivos: {str(round(self.inactiveDesktops.size,2))}
         Clientes en cola: {str(round(self.clients.size,2))}
@@ -252,7 +256,12 @@ class AttentionPoint():
         Tiempo promedio de atención: {str(round(self.averageAttentionTime,2))}
         Tiempo máximo de atención: {str(round(self.maximumAttentionTime,2))}
         Tiempo mínimo de atención: {str(round(self.minimumAttentionTime,2))}
+
+        ALARMAS DISPARADAS: 
+        {self.alarm}
         
+        ESTADO ACTUAL DE LOS ESCRITORIOS:
+
 {self.getDestopSimulationPropsAsStr()}
 
         """

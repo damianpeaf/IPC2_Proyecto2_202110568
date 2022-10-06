@@ -1,6 +1,7 @@
 
 from classes.Client import Client
 from core.SimpleList import SimpleList
+from rich.console import Console
 
 
 class Desktop():
@@ -33,7 +34,7 @@ class Desktop():
     def workOnNextClientransaction(self):
 
         if self.attendentClient is None:
-            return
+            return True
 
         nextTransaction = self.attendentClient.transactions.getItem(0)
         if nextTransaction:

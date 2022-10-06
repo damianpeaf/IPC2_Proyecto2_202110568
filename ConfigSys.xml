@@ -8,11 +8,11 @@
             <nombre> Banrural Villa Nueva </nombre>
             <direccion> Centro comercial zona 1 </direccion>
             <listaEscritorios>
-               <escritorio id="B10"> 
+               <escritorio id="B10">
                   <identificacion> B011 </identificacion>
                   <encargado> Julius Ramirez </encargado>
                </escritorio>
-               <escritorio id="A20"> 
+               <escritorio id="A20">
                   <identificacion> A022 </identificacion>
                   <encargado> Isaac Newton </encargado>
                </escritorio>
@@ -22,19 +22,19 @@
             <nombre> Banrural Amatitlan </nombre>
             <direccion> Centro comercial Flores </direccion>
             <listaEscritorios>
-               <escritorio id="C30"> 
+               <escritorio id="C30">
                   <identificacion> C033 </identificacion>
                   <encargado> Carlo Magno </encargado>
                </escritorio>
-               <escritorio id="D40"> 
+               <escritorio id="D40">
                   <identificacion> D044 </identificacion>
                   <encargado> Albert Einstein </encargado>
                </escritorio>
-               <escritorio id="E50"> 
+               <escritorio id="E50">
                   <identificacion> E055 </identificacion>
                   <encargado> Galileo Galilei </encargado>
                </escritorio>
-               <escritorio id="F60"> 
+               <escritorio id="F60">
                   <identificacion> F066 </identificacion>
                   <encargado> Euclides </encargado>
                </escritorio>
@@ -42,29 +42,29 @@
          </puntoAtencion>
       </listaPuntosAtencion>
       <listaTransacciones>
-         <transaccion id="COCH"> 
+         <transaccion id="COCH">
             <nombre> Cobro de cheque </nombre>
-            <tiempoAtencion> 8 </tiempoAtencion>
+            <tiempoAtencion> 0.1 </tiempoAtencion>
          </transaccion>
-         <transaccion id="REEF"> 
+         <transaccion id="REEF">
             <nombre> Retiro efectivo </nombre>
-            <tiempoAtencion> 5 </tiempoAtencion>
+            <tiempoAtencion> 0.1 </tiempoAtencion>
          </transaccion>
-         <transaccion id="DEEF"> 
+         <transaccion id="DEEF">
             <nombre> Depositar efectivo </nombre>
-            <tiempoAtencion> 5 </tiempoAtencion>
+            <tiempoAtencion> 0.1 </tiempoAtencion>
          </transaccion>
-         <transaccion id="APCU"> 
+         <transaccion id="APCU">
             <nombre> Aperturar cuenta bancaria </nombre>
-            <tiempoAtencion> 15 </tiempoAtencion>
+            <tiempoAtencion> 0.1 </tiempoAtencion>
          </transaccion>
-         <transaccion id="CECU"> 
+         <transaccion id="CECU">
             <nombre> Cerrar cuenta bancaria </nombre>
-            <tiempoAtencion> 10 </tiempoAtencion>
+            <tiempoAtencion> 0.1 </tiempoAtencion>
          </transaccion>
-         <transaccion id="COSE"> 
+         <transaccion id="COSE">
             <nombre> Contratar seguro </nombre>
-            <tiempoAtencion> 10 </tiempoAtencion>
+            <tiempoAtencion> 0.1 </tiempoAtencion>
          </transaccion>
       </listaTransacciones>
    </empresa>
@@ -76,11 +76,11 @@
             <nombre> Claro Villa Nueva </nombre>
             <direccion> Centro comercial zona 1 </direccion>
             <listaEscritorios>
-               <escritorio id="G900"> 
+               <escritorio id="G900">
                   <identificacion> G999 </identificacion>
                   <encargado> Charles Darwin </encargado>
                </escritorio>
-               <escritorio id="H800"> 
+               <escritorio id="H800">
                   <identificacion> BH888 </identificacion>
                   <encargado> Genghis Khan </encargado>
                </escritorio>
@@ -90,19 +90,19 @@
             <nombre> Claro Amatitlan </nombre>
             <direccion> Centro comercial Flores </direccion>
             <listaEscritorios>
-               <escritorio id="I700"> 
+               <escritorio id="I700">
                   <identificacion> I777 </identificacion>
                   <encargado> Nicola Tesla </encargado>
                </escritorio>
-               <escritorio id="J600"> 
+               <escritorio id="J600">
                   <identificacion> J666 </identificacion>
                   <encargado> Henry Cavil </encargado>
                </escritorio>
-               <escritorio id="K500"> 
+               <escritorio id="K500">
                   <identificacion> K555 </identificacion>
                   <encargado> Ana de Armas :3  </encargado>
                </escritorio>
-               <escritorio id="SIUU"> 
+               <escritorio id="SIUU">
                   <identificacion> L444 </identificacion>
                   <encargado> El bicho siuuu </encargado>
                </escritorio>
@@ -110,19 +110,19 @@
          </puntoAtencion>
       </listaPuntosAtencion>
       <listaTransacciones>
-         <transaccion id="COCA"> 
+         <transaccion id="COCA">
             <nombre> Contratar casa claro </nombre>
             <tiempoAtencion> 10 </tiempoAtencion>
          </transaccion>
-         <transaccion id="CASE"> 
+         <transaccion id="CASE">
             <nombre> Cancerlar servicios e irse a tigo que es mejor :V </nombre>
             <tiempoAtencion> 8 </tiempoAtencion>
          </transaccion>
-         <transaccion id="PAME"> 
+         <transaccion id="PAME">
             <nombre> Pagar mensualidad del servicio </nombre>
             <tiempoAtencion> 5 </tiempoAtencion>
          </transaccion>
-         <transaccion id="COPR"> 
+         <transaccion id="COPR">
             <nombre> Comprar productos de la tienda </nombre>
             <tiempoAtencion> 10 </tiempoAtencion>
          </transaccion>
